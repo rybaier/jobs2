@@ -16,9 +16,11 @@ const MapScreen = () => {
     }, [])
     console.log( region )
 
-    const onRegionChangeComplete = () =>{
-     console.log(region)
+    const onRegionChangeComplete = (region) => {
+        setRegion(region)
+        console.log(region)
     }
+    
     if (!mapLoaded) {
         return (
             <View style ={{ flex: 1, justifyContent: 'center'}}>
@@ -31,8 +33,9 @@ const MapScreen = () => {
             <MapView 
             region= { region } 
             style = { styles.map } 
-            onRegionChangeComplete = { (region) => console.log(setRegion(region)) } 
+            onRegionChangeComplete = { (region) => onRegionChangeComplete(region) } 
             //the above arrow function updates the region to current coordinates at center of map
+            // accessing the region subcomponent as an argument
             />
         </View>
     )
