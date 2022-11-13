@@ -1,13 +1,19 @@
 import React,  { useState, useEffect } from "react";
+import _ from 'lodash'
 import { View, Text, StyleSheet } from 'react-native'
 import { ScrollView } from "react-native-gesture-handler";
 import Slides from "../components/Slides";
 import { navigate } from "../../jobs2/RootNavigation";
-import AppLoading from 'expo'
+import {AppLoading} from 'expo'
 import AsyncStorage from "react-native"
-const WelcomeScreen = () => {
 
-    const {token, setToken} = useState(null)
+// resolve FB modal error from AuthScreen
+const WelcomeScreen = () => {
+ const  [ token, setToken ] = useState('null')
+//   useEffect(() => {
+//         checkToken()
+//     }, [])
+   
     
     const checkToken = async () => {
         setToken = await AsyncStorage.getItem('fb_token') 
@@ -15,7 +21,7 @@ const WelcomeScreen = () => {
 
 
     const onSlidesComplete = () => {
-        navigate('Auth')
+         navigate('Auth')
     }
 
     const SLIDE_DATA = [
@@ -24,10 +30,9 @@ const WelcomeScreen = () => {
         {text: 'Set your location then swipe away', color: '#03A9F4',}
     ]
 
-    useEffect(() => {
-        checkToken()
-
-    }, [])
+//    if (_.isNull(token)){
+//             return <AppLoading />
+//         }
 
     return(
         
