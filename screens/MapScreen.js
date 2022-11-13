@@ -14,7 +14,7 @@ const MapScreen = () => {
     useEffect(()=> {
         setMapLoaded(true)
     }, [])
-    console.log( region )
+    // console.log( region )
 
     const onRegionChangeComplete = (region) => {
         setRegion(region)
