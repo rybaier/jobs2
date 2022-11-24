@@ -20,15 +20,12 @@ const buildJobsURL = (zip) => {
 }
 
 export const fetchJobs = async (region) => {
-   
         try{
             let zip = await geo2zip(region)
             const url = buildJobsURL(zip._z)
             let result = await axios.get(url)
             console.log(result.data)
-
             
-
         } catch(error){
             console.log(error)
         }
@@ -38,6 +35,7 @@ export const fetchJobs = async (region) => {
 
 // DEPRECEATED BELOW
 // const fetchJobs = (region) => async ( dispatch ) => {
+    //when dispatch is in function it keeps it from being used on MapScreen, have no idea why
 //     try {
 //         let zip = await reverseGeocode(region)
 //         const url = buildJobsURL(zip)

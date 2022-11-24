@@ -9,7 +9,8 @@ import { navigate } from "../../jobs2/RootNavigation";
 const AuthScreen = () => {
 // facebook modal is not showing up debug later
     useEffect(()=>{
-       facebookLogin()
+       facebookLogin
+       console.log('auth test')
 
     })
     //figure out FB modal issue first before adding to useEffect
