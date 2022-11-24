@@ -23,6 +23,7 @@
     "expo-random": "~12.3.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
+    "geo2zip": "^4.0.1",
     "latlng-to-zip": "^0.0.2",
     "lodash": "^4.17.21",
     "qs": "^6.11.0",
