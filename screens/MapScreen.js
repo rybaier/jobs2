@@ -5,7 +5,10 @@ import MapView from 'react-native-maps'
 import { Button } from "@rneui/themed";
 import { connect } from "react-redux";
 import * as actions from '../actions'
-import { fetchJobs } from "../actions";
+import { fetchJobs } from "../actions/job_actions";
+import { geo2zip } from 'geo2zip'
+
+
 
 const MapScreen = () => {
     const [ region, setRegion ] = useState({
@@ -26,8 +29,9 @@ const MapScreen = () => {
         console.log(region)
     }
     const onButtonPress = () => {
+        let zip = geo2zip(region) // use zip._z to access zipcode
         fetchJobs(region)
-        console.log('button pushed')
+        console.log( ' button pushed')
     }
     if (!mapLoaded) {
         return (

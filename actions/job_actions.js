@@ -7,7 +7,7 @@ import { FETCH_JOBS } from './types'
 
 const JOB_ROOT__URL = 'http://api.indeed.com/ads/apisearch?';
 const JOB_QUERY_PARAMS = {
-    publisher: '4201738803816157',
+    publisher: '1303284387458115',//publisher source from Lecture QA Sehajbir
     format: 'json',
     v: '2',
     latlong: 1,
@@ -19,19 +19,20 @@ const buildJobsURL = (zip) => {
     return `${JOB_ROOT__URL}${query}`
 }
 
-export const fetchJobs = (region) => {
-    return async(dispatch) => {
+export const fetchJobs = async (region) => {
+   
         try{
             let zip = await geo2zip(region)
-            const url = buildJobsURL(zip)
+            const url = buildJobsURL(zip._z)
             let result = await axios.get(url)
             console.log(result.data)
+
             
 
         } catch(error){
             console.log(error)
         }
-    }
+    
 } 
 
 
