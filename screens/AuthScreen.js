@@ -10,7 +10,7 @@ const AuthScreen = () => {
 // facebook modal is not showing up debug later
     useEffect(()=>{
        facebookLogin
-       console.log('auth test')
+    //    console.log('auth test')
 
     })
     //figure out FB modal issue first before adding to useEffect

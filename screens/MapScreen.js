@@ -31,6 +31,7 @@ const MapScreen = () => {
     const onButtonPress = () => {
         let zip = geo2zip(region) // use zip._z to access zipcode
         fetchJobs(region)
+        
         console.log(  ' button pushed')
     }
     if (!mapLoaded) {

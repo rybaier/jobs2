@@ -2,8 +2,8 @@ import axios from 'axios'
 // import reverseGeocode from 'latlng-to-zip' DEPRECEATED
 import { geo2zip } from 'geo2zip'
 import qs from 'qs'
-
 import { FETCH_JOBS } from './types'
+import DeckScreen from '../screens/DeckScreen'
 
 const JOB_ROOT__URL = 'http://api.indeed.com/ads/apisearch?';
 const JOB_QUERY_PARAMS = {
@@ -24,7 +24,11 @@ export const fetchJobs = async (region) => {
             let zip = await geo2zip(region)
             const url = buildJobsURL(zip._z)
             let result = await axios.get(url)
-            console.log(result.data)
+            console.log(result.data) // use result.data.results to access data later
+            {<DeckScreen newJobs = { result.data.results}/>}
+            // dispatch({ type: FETCH_JOBS, payload: result.data.results })
+                
+            
             
         } catch(error){
             console.log(error)
