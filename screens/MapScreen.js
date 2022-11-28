@@ -33,7 +33,7 @@ const MapScreen = () => {
         let zip = geo2zip(region) // use zip._z to access zipcode
         fetchJobs(region)
         navigate('Deck')
-        console.log(  ' button pushed')
+        // console.log(  ' button pushed')
     }
     if (!mapLoaded) {
         return (

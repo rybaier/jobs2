@@ -26,10 +26,9 @@ export const fetchJobs = async (region, callback) => {
             let zip = await geo2zip(region)
             const url = buildJobsURL(zip._z)
             let result = await axios.get(url)
-            console.log(result.data) // use result.data.results to access data later
-            store.dispatch({ type: FETCH_JOBS, payload: result.data.results })
-                
-            
+            // console.log(result.data) // use result.data.results to access data later
+            store.dispatch({ type: FETCH_JOBS, payload: result.data })
+            console.log('complete')
             
         } catch(error){
             console.log(error)
