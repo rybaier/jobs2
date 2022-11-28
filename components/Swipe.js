@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { View, Animated, Text, StyleSheet, Dimensions, LayoutAnimation, UIManager,
     PanResponder, PanResponderCallbacks } from 'react-native'
 import { Card, Button, Image } from '@rneui/themed'
+import { MapView } from 'react-native-maps'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 // 
+
+
 const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards }) => {
     console.log('DATA', data.length)
     const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH
@@ -13,7 +16,6 @@ const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards 
 
     let position = new Animated.ValueXY()
   
-
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove : (event, gesture ) =>{ 
@@ -76,16 +78,16 @@ const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards 
             transform: [{ rotate }]
         }}
 
-    // const areThereCards = () => {
-    //     console.log(index, data.length)
-    //      index >= data.length ? renderNoMoreCards() : renderCards()
-    //   }
+    const areThereCards = () => {
+        console.log(index, data.length)
+         index >= data.length ? renderNoMoreCards() : renderCards()
+      }
       
       const renderCards = () => data.map((item, i) => {
         //   if ( index >= data.length) { return renderNoMoreCards() }
-
+    
           if (i < index) { return null }
-
+    
           if (i === index) {
                 return(
                     <Animated.View 
@@ -99,14 +101,14 @@ const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards 
             return (
                 <Animated.View
                  key={item.id} 
-                style={[styles.cardStyle, { top: 20 * ( i - index ) }]}>
+                style={[styles.cardStyle, { top: 10 * ( i - index ) }]}>
                     { renderCard(item) }
                 </Animated.View>
             )
-      }).reverse();
+      }) 
     
   
-    return <View>{index >= data.length ? renderNoMoreCards() : renderCards()}</View>;
+    return <View>{index >= data.length ? renderNoMoreCards() : renderCards() }</View>;
 }
 const styles = StyleSheet.create({
     container: {
@@ -122,4 +124,3 @@ export default Swipe
 
 
 
-   

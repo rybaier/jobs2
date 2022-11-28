@@ -1,12 +1,14 @@
 import React, { useEffect }  from "react";
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet, Platform, SafeAreaView } from 'react-native'
 import { connect } from "react-redux";
-import Swipe from "../components/Swipe";
-import { Mapview } from 'react-native-maps'
+import { MapView } from 'react-native-maps'
 import { Card, Button } from "@rneui/themed";
+import Swipe from "../components/Swipe";
+import * as actions from '../actions'
+import { stubArray } from "lodash";
 
 const DeckScreen = ({ jobs }) => {
-    // console.log(jobs, '1')
+console.log('COMPLETE',jobs)
     const renderCard = (job) => {
         const initialRegion = {
             longitude: job.longitude,
@@ -15,19 +17,16 @@ const DeckScreen = ({ jobs }) => {
             longitudeDelta: 0.02
         }
         return(
-            <Card title = { job.jobtitle }>
-                <View style= {{ height: 300 }}>
-                    <Mapview 
+            <Card key = {job.jobkey} style = {styles.detailWrappers}>
+                <Card.Title> {job.title} </Card.Title>
+                    {/* <MapView 
+                    style= {{ height: 300, flex:1 }}
                     scrollEnabled={ false }
-                    style = {{ flex:1 }}
                     cacheEnabled={ Platform.OS === 'android' ? true: false }
-                    intialRegion = { initialRegion }
-                />
-                </View>
-                <View style={ styles.detailWrapper }>
+                    region = { initialRegion }
+                /> */}
                     <Text>{ job.company }</Text>
                     <Text>{ job.formattedRelativeTime }</Text>
-                </View>
                 <Text> { job.snippet.replace(/<b>/g, '').replace(/<\/b/g, '') }</Text>
             </Card>
         )
@@ -35,16 +34,23 @@ const DeckScreen = ({ jobs }) => {
     const renderNoMoreCards = () => {
         return (
             <Card title= 'No more jobs'>
-                <Text>Deck</Text>
+                <Text>DECK</Text>
             </Card>
         )
     }
+    const onSwipeRight = () => {
 
+    }
+    const onSwipeLeft = () => {
+    
+    }
     return(
         <View>
             <Swipe data={ jobs }
-            renderCard={ renderCard }
-            renderNoMoreCards= { renderNoMoreCards }
+           renderCard= { renderCard }
+           onSwipeLeft={ onSwipeLeft } 
+           onSwipeRight = { onSwipeRight }
+           renderNoMoreCards = { renderNoMoreCards }
             />            
         </View>
     )
@@ -61,4 +67,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect (mapStateToProps) (DeckScreen)
+export default connect (mapStateToProps, actions) (DeckScreen)
