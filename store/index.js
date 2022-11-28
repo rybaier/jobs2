@@ -1,8 +1,10 @@
-import { legacy_createStore, compose, applyMiddleware } from 'redux'
+import { compose, applyMiddleware } from 'redux'
+import { legacy_createStore as createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk'
 import reducers from '../reducers';
 
-const store = legacy_createStore(
+const store = createStore(
     reducers, 
     {},
     compose(

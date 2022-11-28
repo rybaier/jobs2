@@ -1,7 +1,11 @@
 import * as Facebook from 'expo-facebook'
 import AsyncStorage from "react-native"
 import { FACEBOOK_LOGIN_SUCCESS, FACEBOOK_LOGIN_FAIL } from "./types";
+import store from '../store';
 
+
+// BUG fix use store.dispatch??? eliminate dispatch as argument and access directly from store? 
+    // work around for deprecieated createStore??
 
 // How to use AsyncStorage:
 // AsyncStorage.setItem('fb_token' , token)

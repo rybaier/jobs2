@@ -1,6 +1,6 @@
 import { FETCH_JOBS } from "../actions/types";
 
-const INITIAL_STATE = {
+const initialState = {
     results: []
 }
 
@@ -9,6 +9,6 @@ export default function (state, action) {
         case FETCH_JOBS :
             return  action.payload
         default: 
-            return state
+            return initialState
     }
 }

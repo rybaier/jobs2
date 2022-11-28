@@ -40,10 +40,10 @@ const SecondaryNavigator = () => {
 const MainNavigator = () => {
   return(
     <Tab.Navigator>
-    <Tab.Screen name= 'Map' component={ MapScreen }/>
-    <Tab.Screen name = 'Deck' component={ DeckScreen } />
-    <Tab.Screen name = 'Review' component={ SecondaryNavigator} options={{ headerShown: false}}/>
-  </Tab.Navigator>
+      <Tab.Screen name= 'Map' component={ MapScreen }/>
+      <Tab.Screen name = 'Deck' component={ DeckScreen } />
+      <Tab.Screen name = 'Review' component={ SecondaryNavigator} options={{ headerShown: false}}/>
+    </Tab.Navigator>
   )
 }
 

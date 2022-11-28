@@ -1,8 +1,8 @@
-import React  from "react";
+import React, { useEffect }  from "react";
 import { View, Text, StyleSheet } from 'react-native'
 
-const DeckScreen = ({ newJobs }) => {
-    console.log(newJobs)
+const DeckScreen = ({store}) => {
+    console.log ('ll')
     return(
         <View>
             <Text> DeckScreen </Text>

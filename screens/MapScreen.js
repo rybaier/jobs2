@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import * as actions from '../actions'
 import { fetchJobs } from "../actions/job_actions";
 import { geo2zip } from 'geo2zip'
+import { navigate } from "../RootNavigation";
 
 
 
@@ -31,7 +32,7 @@ const MapScreen = () => {
     const onButtonPress = () => {
         let zip = geo2zip(region) // use zip._z to access zipcode
         fetchJobs(region)
-        
+        navigate('Deck')
         console.log(  ' button pushed')
     }
     if (!mapLoaded) {

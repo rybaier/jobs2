@@ -4,6 +4,7 @@ import { geo2zip } from 'geo2zip'
 import qs from 'qs'
 import { FETCH_JOBS } from './types'
 import DeckScreen from '../screens/DeckScreen'
+import store from '../store'
 
 const JOB_ROOT__URL = 'http://api.indeed.com/ads/apisearch?';
 const JOB_QUERY_PARAMS = {
@@ -19,14 +20,14 @@ const buildJobsURL = (zip) => {
     return `${JOB_ROOT__URL}${query}`
 }
 
-export const fetchJobs = async (region) => {
+
+export const fetchJobs = async (region, callback) => {
         try{
             let zip = await geo2zip(region)
             const url = buildJobsURL(zip._z)
             let result = await axios.get(url)
             console.log(result.data) // use result.data.results to access data later
-            {<DeckScreen newJobs = { result.data.results}/>}
-            // dispatch({ type: FETCH_JOBS, payload: result.data.results })
+            store.dispatch({ type: FETCH_JOBS, payload: result.data.results })
                 
             
             
