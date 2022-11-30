@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Animated, Text, StyleSheet, Dimensions, LayoutAnimation, UIManager,
-    PanResponder, PanResponderCallbacks } from 'react-native'
+    PanResponder, PanResponderCallbacks, Platform } from 'react-native'
 import { Card, Button, Image } from '@rneui/themed'
 import { MapView } from 'react-native-maps'
 
@@ -8,8 +8,8 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 // 
 
 
-const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards }) => {
-    console.log('DATA', data.length)
+const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards, keyProp }) => {
+    console.log('DATA', data.length, data[0])
     const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH
     const SWIPEOUT_DURATION = 250
     const [index, setIndex]  = useState(0)
@@ -83,31 +83,35 @@ const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards 
          index >= data.length ? renderNoMoreCards() : renderCards()
       }
       
-      const renderCards = () => data.map((item, i) => {
-        //   if ( index >= data.length) { return renderNoMoreCards() }
-    
-          if (i < index) { return null }
-    
-          if (i === index) {
-                return(
-                    <Animated.View 
-                    key = {item.id}
-                    style= {[ getCardStyle(), styles.cardStyle ]} 
-                    {...panResponder.panHandlers}>
-                        { renderCard(item)}
+      const renderCards = () => {
+      
+        const deck = data.map((item, i) => {
+            //   if ( index >= data.length) { return renderNoMoreCards() }
+        
+            if (i < index) { return null }
+        
+            if (i === index) {
+                    return(
+                        <Animated.View 
+                        key = { keyProp }
+                        style= {[ getCardStyle(), styles.cardStyle ]} 
+                        {...panResponder.panHandlers}>
+                            { renderCard(item)}
+                        </Animated.View>
+                    )
+                }
+                return (
+                    <Animated.View
+                    key={keyProp} 
+                    style={[styles.cardStyle, { top: 20 * ( i - index ), zIndex: -i }]}>
+                        { renderCard(item) }
                     </Animated.View>
                 )
-            }
-            return (
-                <Animated.View
-                 key={item.id} 
-                style={[styles.cardStyle, { top: 10 * ( i - index ) }]}>
-                    { renderCard(item) }
-                </Animated.View>
-            )
-      }) 
+        })
+            //wierd android lagtime fix
+            return Platform.OS === 'android' ? deck : deck.reverse()
     
-  
+      }
     return <View>{index >= data.length ? renderNoMoreCards() : renderCards() }</View>;
 }
 const styles = StyleSheet.create({
