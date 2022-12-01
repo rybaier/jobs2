@@ -2,7 +2,7 @@ import axios from 'axios'
 // import reverseGeocode from 'latlng-to-zip' DEPRECEATED
 import { geo2zip } from 'geo2zip'
 import qs from 'qs'
-import { FETCH_JOBS, LIKE_JOBS } from './types'
+import { FETCH_JOBS, LIKE_JOBS, CLEAR_LIKED_JOBS } from './types'
 import DeckScreen from '../screens/DeckScreen'
 import store from '../store'
 
@@ -37,9 +37,20 @@ export const fetchJobs = async (region, callback) => {
 } 
 
 export const likeJob = (job) => {
-    return {
-        payload: job,
-        type: LIKE_JOBS
+    try {
+         store.dispatch({type: LIKE_JOBS, payload: job})
+        }
+     catch (error) {
+        
+    }
+
+}
+
+export const clearLikedJobs = () => {
+    try {
+        store.dispatch({type: CLEAR_LIKED_JOBS})
+    } catch (error) {
+        
     }
 }
 

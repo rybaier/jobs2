@@ -9,7 +9,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 
 
 const Swipe = ({ data, renderCard, onSwipeRight, onSwipeLeft, renderNoMoreCards, keyProp }) => {
-    console.log('DATA', data.length, data[0])
+    // console.log('DATA', data.length, data[0])
     const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH
     const SWIPEOUT_DURATION = 250
     const [index, setIndex]  = useState(0)

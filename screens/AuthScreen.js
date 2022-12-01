@@ -7,7 +7,8 @@ import { facebookLogin } from "../actions";
 import { navigate } from "../../jobs2/RootNavigation";
 
 const AuthScreen = () => {
-// facebook modal is not showing up debug later
+// facebook modal is not showing up due to not wanting to start a facebook developer profile
+//code is set up for it to work once profile is begun 
     useEffect(()=>{
        facebookLogin
     //    console.log('auth test')

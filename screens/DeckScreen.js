@@ -5,8 +5,8 @@ import  MapView  from 'react-native-maps'
 import { Card, Button } from "react-native-elements";
 import Swipe from "../components/Swipe";
 import * as actions from '../actions'
-import { stubArray } from "lodash";
 import { likeJob } from "../actions";
+import { navigate } from "../RootNavigation";
 
 const DeckScreen = ({ jobs }) => {
 
@@ -37,7 +37,13 @@ const DeckScreen = ({ jobs }) => {
     const renderNoMoreCards = () => {
         return (
             <Card title= 'No more jobs'>
-                <Text>no more jobs</Text>
+                <Text>No More Jobs</Text>
+                <Button title="Go back to the Map" 
+                large
+                icon={{name: 'my-location'}}
+                backgroundColor= "03A9F4"
+                onPress={() => {navigate('Map')}}
+                />
             </Card>
         )
     }
@@ -53,7 +59,7 @@ const DeckScreen = ({ jobs }) => {
             <Swipe data={ jobs }
            renderCard= { renderCard }
            onSwipeLeft={ onSwipeLeft } 
-           onSwipeRight = { onSwipeRight }
+           onSwipeRight = { (job) => onSwipeRight(job) }
            renderNoMoreCards = { renderNoMoreCards }
            keyProp = {jobs.jobkey}
             />            

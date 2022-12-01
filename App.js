@@ -15,6 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
 import store from './store';
 import { lazy } from 'react';
+import { Icon } from '@rneui/themed';
 
 
 
@@ -22,27 +23,40 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const SecondaryNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name='Review' component={ ReviewScreen } options={{
-        title: 'Review Jobs',
-        headerRight: () => (
-          <TouchableOpacity onPress={ () => navigate("Settings")}>
-            <Text style= {styles.buttonText}> Settings </Text>
-          </TouchableOpacity>
-        )
-      }} />
-      <Stack.Screen name= 'Settings' component={ SettingScreen } />
-    </Stack.Navigator>
-  )
-}
+//secondary navigator no longer needed
+// const SecondaryNavigator = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name='Review' component={ ReviewScreen } options={{
+//         title: 'Review Jobs',
+//         headerRight: () => (
+//           <TouchableOpacity onPress={ () => navigate("Settings")}>
+//             <Text style= {styles.buttonText}> Settings </Text>
+//           </TouchableOpacity>
+//         )
+//       }} />
+//       <Stack.Screen name= 'Settings' component={ SettingScreen } />
+//     </Stack.Navigator>
+//   )
+// }
 const MainNavigator = () => {
   return(
     <Tab.Navigator>
-      <Tab.Screen name= 'Map' component={ MapScreen }/>
-      <Tab.Screen name = 'Deck' component={ DeckScreen } />
-      <Tab.Screen name = 'Review' component={ SecondaryNavigator} options={{ headerShown: false}}/>
+      <Tab.Screen name= 'Map' component={ MapScreen } options={{ title: 'Map', tabBarIcon: ( { tintColor }) => {
+        return <Icon name='my-location' size = {30} color = {tintColor}/>
+      }}}/>
+      <Tab.Screen name = 'Deck' component={ DeckScreen } options={{ title:'Jobs',tabBarIcon: ( { tintColor }) => {
+        return <Icon name='description' size = {30} color = {tintColor} /> }}}/>
+      <Tab.Screen name = 'Review' component={ ReviewScreen } 
+        options={{ 
+          title: 'Review Jobs',
+          headerRight: () => (
+            <TouchableOpacity onPress={ () => navigate("Settings")}>
+              <Text style= {styles.buttonText}> Settings </Text>
+            </TouchableOpacity>
+          ),
+          tabBarIcon: ( { tintColor }) => {
+          return <Icon name='favorite' size = {30} color = {tintColor} /> }}}/>
     </Tab.Navigator>
   )
 }
@@ -66,7 +80,8 @@ export default function App() {
         <Stack.Navigator initialRouteName='Welcome'>
           <Stack.Screen name = "Primary" component={ PrimaryNavigator } options={{ headerShown: false }}/>
           <Stack.Screen name = 'Main' component= { MainNavigator } options={{ headerShown: false }}/>
-          <Stack.Screen name = "Secondary" component={ SecondaryNavigator } options={{ headerShown: false }}/>
+          {/* <Stack.Screen name = "Secondary" component={ SecondaryNavigator } options={{ headerShown: false }}/> */}
+          <Stack.Screen name= 'Settings' component={ SettingScreen } />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
