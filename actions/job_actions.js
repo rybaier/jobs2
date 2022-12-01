@@ -49,6 +49,7 @@ export const likeJob = (job) => {
 export const clearLikedJobs = () => {
     try {
         store.dispatch({type: CLEAR_LIKED_JOBS})
+        console.log('cleared')
     } catch (error) {
         
     }
