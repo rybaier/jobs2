@@ -21,6 +21,7 @@
     "expo": "~46.0.17",
     "expo-auth-session": "3.7.1",
     "expo-facebook": "^12.2.0",
+    "expo-notifications": "^0.17.0",
     "expo-random": "~12.3.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",

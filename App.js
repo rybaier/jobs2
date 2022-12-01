@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import Expo, { Notifications } from 'expo'
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -16,6 +16,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { lazy } from 'react';
 import { Icon } from '@rneui/themed';
+import registerForNotifications from './services/push_notifications';
 
 
 
@@ -72,8 +73,17 @@ const PrimaryNavigator = () => {
 }
 
 export default function App() {
-
-
+  //Notifications depreciated use current version of expo-notifications doc for new apps
+   registerForNotifications()
+    // Notifications.addListener((notification) => {
+    //   const {data : {text}, origin } = notification
+      
+    //   Alert.alert(
+    //     'New Push Notificaiton',
+    //     text,
+    //     [{text: 'ok'}]
+    //   )
+    // })
   return (
     <Provider store = {store}>
       <NavigationContainer ref={ navigationRef }>
