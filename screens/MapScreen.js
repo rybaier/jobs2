@@ -12,6 +12,7 @@ import { navigate } from "../RootNavigation";
 
 
 const MapScreen = () => {
+
     const [ region, setRegion ] = useState({
         longitude: -122,
         latitude: 37,
